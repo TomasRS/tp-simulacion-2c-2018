@@ -5,23 +5,28 @@ namespace TP_Simulacion
 {
     public class Simulacion
     {
-        int TPC;
-        int TREP;
-        int T;
-        int TFINAL;
-        int VB;
-        int[] contadoresEscalas;
+        double TPC;
+        double TREP;
+        double T;
+        double TFINAL;
+        double VB;
+        double [] contadoresEscalas;
+        double BLSAFUERA;
+        Random random;
 
         public void inicializar()
         {
             T = 0;
-            TFINAL = 175;
+            TPC = 1;
+            TFINAL = 10;
             TREP = 35;
-            contadoresEscalas = new int[13];
+            VB = 500000;
+            random = new Random();
+            contadoresEscalas = new double[13];
             contadoresEscalas.Initialize();
         }
 
-        public int escalaSegunVolumen(int Vol)
+        public int escalaSegunVolumen(double Vol)
         {
             if (Vol.IsBetween(10, 70)) { return 1; }
             else if (Vol.IsBetween(71, 140)) { return 2; }
@@ -39,26 +44,78 @@ namespace TP_Simulacion
             else { return 0; }
         }
 
-        public void contabilizarloEnLaEscala(int VolCompra, int escala)
+        public void contabilizarloEnLaEscala(double VolCompra, int escala)
         {
-            contadoresEscalas[escala] = contadoresEscalas[escala] + VolCompra;
+            contadoresEscalas[escala-1] = contadoresEscalas[escala-1] + VolCompra;
         }
 
-        public int generoIC()
+        public double generoIC()
         {
-            //TODO: Logica
-            return 0;
+            double x1;
+            double y1;
+            while (true)
+            {
+                double R1 = random.NextDouble();
+                double R2 = random.NextDouble();
+                x1 = 137 * R1 + 19;
+                y1 = 59 * R2;
+                if ((1 / 137) >= y1)
+                {
+                    break;
+                }
+                else
+                {
+
+                }
+            }
+
+            return x1;
         }
 
-        public double generoR()
+        public double generoVolumenCompraLA()
         {
-            return 0;
+            double x1;
+            double y1;
+            while (true)
+            {
+                double R1 = random.NextDouble();
+                double R2 = random.NextDouble();
+                x1 = 4496 * R1 + 4;
+                y1 = 100 * R2;
+                if ((1 / 4496) >= y1)
+                {
+                    break; 
+                }
+                else
+                {
+
+                }
+            }
+
+            return x1;
         }
 
-        public int generoVolumenCompra()
+        public double generoVolumenCompraF()
         {
-            //TODO: Logica
-            return 0;
+            double x1;
+            double y1;
+            while (true)
+            {
+                double R1 = random.NextDouble();
+                double R2 = random.NextDouble();
+                x1 = 4449 * R1 + 1;
+                y1 = 50 * R2;
+                if ((1 / 4449) >= y1)
+                {
+                    break;
+                }
+                else
+                {
+
+                }
+            }
+
+            return x1;
         }
 
         public void comenzarSimulacion()
@@ -69,39 +126,56 @@ namespace TP_Simulacion
                 if (TPC <= TREP) //me compran
                 {
                     T = TPC;
-                    int IC = generoIC();
-                    TPC = T + IC;
-                    double R = generoR();
+                    //double IC = generoIC();
+                    TPC = T + 1;
+                    Console.Write(TPC.ToString());
+                    double R = random.NextDouble();
                     if (R <= 0.16)
                     {
-                        int VolumenCompraLA = generoVolumenCompra();
+                        double VolumenCompraLA = generoVolumenCompraLA();
                         if (VB >= VolumenCompraLA)
                         {
-                            VB = VB - VolumenCompraLA;
-                            contabilizarloEnLaEscala(VolumenCompraLA, escalaSegunVolumen(VolumenCompraLA));
+                            if (VB < 10)
+                            {
+                                BLSAFUERA = BLSAFUERA + VB;
+                            }
+                            else
+                            {
+                                VB = VB - VolumenCompraLA;
+                                contabilizarloEnLaEscala(VolumenCompraLA, escalaSegunVolumen(VolumenCompraLA));
+                                Console.WriteLine("me compro LA");
+                            }
                         }
                         else
                         {
-                            //volver al while
+                            Console.WriteLine("again");
                         }
                     }
 
                     else if (R <= 0.86)
                     {
-                        int VolumenCompraF = generoVolumenCompra();
+                        double VolumenCompraF = generoVolumenCompraF();
                         if (VB >= VolumenCompraF)
                         {
-                            VB = VB - VolumenCompraF;
-                            contabilizarloEnLaEscala(VolumenCompraF, escalaSegunVolumen(VolumenCompraF));
+                            if (VB < 10)
+                            {
+                                BLSAFUERA = BLSAFUERA + VB;
+                            }
+                            else
+                            {
+                                VB = VB - VolumenCompraF;
+                                contabilizarloEnLaEscala(VolumenCompraF, escalaSegunVolumen(VolumenCompraF));
+                                Console.WriteLine("me compro F");
+                            }
                         }
                         else
                         {
-                            //volver al while
+                            Console.WriteLine("again");
                         }
                     }
                     else
                     {
-                        //volver al while
+                        Console.WriteLine("again");
                     }
                 }
                 else  //tiempo de reponer bolsas
@@ -109,11 +183,21 @@ namespace TP_Simulacion
                     T = TREP;
                     TREP = T + 35;
                     VB = VB + 500000;
+                    Console.WriteLine("repongo");
                 }
+            
             }
+
+            for (int j = 0; j < 13; j++)
+            {
+                Console.WriteLine(contadoresEscalas[j]);
+            }
+            Console.Write(BLSAFUERA.ToString());
         }
     }
 }
 
-    
+
+
+
 

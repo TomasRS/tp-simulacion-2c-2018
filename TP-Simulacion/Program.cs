@@ -1,4 +1,5 @@
 ﻿using System;
+using TP_Simulacion;
 using System.Windows.Forms;
 
 namespace TP_Simulacion
