@@ -164,7 +164,7 @@ namespace TP_Simulacion
 
             for (int j = 0; j < 13; j++)
             {
-                Console.WriteLine(contadoresEscalas[j]);
+                Console.WriteLine(contadoresEscalas[j]*55);
             }
             Console.Write(BLSAFUERA.ToString());
         }
