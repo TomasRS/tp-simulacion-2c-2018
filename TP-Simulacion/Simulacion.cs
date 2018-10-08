@@ -68,10 +68,6 @@ namespace TP_Simulacion
                 {
                     break; 
                 }
-                else
-                {
-
-                }
             }
 
             return x1;
@@ -83,17 +79,13 @@ namespace TP_Simulacion
             double y1;
             while (true)
             {
-                double R1 = random.NextDouble();
-                double R2 = random.NextDouble();
+                double R1 = random.Next();
+                double R2 = random.Next();
                 x1 = 4449 * R1 + 1;
                 y1 = 50 * R2;
                 if ((1 / 4449) >= y1)
                 {
                     break;
-                }
-                else
-                {
-
                 }
             }
 
@@ -109,7 +101,7 @@ namespace TP_Simulacion
                 {
                     T = TPC;
                     double IC = generoIC();
-                    TPC = T + 1;
+                    TPC = T + IC;
                     Console.Write(TPC.ToString());
                     double R = random.NextDouble();
                     if (R <= 0.16)

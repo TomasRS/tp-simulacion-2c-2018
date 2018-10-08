@@ -1,1 +1,4 @@
 D:\Tomás\FACULTAD\Simulación\tp-simulacion-2c-2018\TP-Simulacion\bin\Debug\TP-Simulacion.exe.config
+D:\Tomás\FACULTAD\Simulación\tp-simulacion-2c-2018\TP-Simulacion\obj\Debug\TP-Simulacion.csprojResolveAssemblyReference.cache
+D:\Tomás\FACULTAD\Simulación\tp-simulacion-2c-2018\TP-Simulacion\obj\Debug\TP_Simulacion.Properties.Resources.resources
+D:\Tomás\FACULTAD\Simulación\tp-simulacion-2c-2018\TP-Simulacion\obj\Debug\TP-Simulacion.csproj.GenerateResource.Cache
