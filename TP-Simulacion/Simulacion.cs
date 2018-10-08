@@ -18,7 +18,7 @@ namespace TP_Simulacion
         {
             T = 0;
             TPC = 1;
-            TFINAL = 10;
+            TFINAL = 365;
             TREP = 35;
             VB = 500000;
             random = new Random();
@@ -51,25 +51,7 @@ namespace TP_Simulacion
 
         public double generoIC()
         {
-            double x1;
-            double y1;
-            while (true)
-            {
-                double R1 = random.NextDouble();
-                double R2 = random.NextDouble();
-                x1 = 137 * R1 + 19;
-                y1 = 59 * R2;
-                if ((1 / 137) >= y1)
-                {
-                    break;
-                }
-                else
-                {
-
-                }
-            }
-
-            return x1;
+            return 0.7;
         }
 
         public double generoVolumenCompraLA()
@@ -126,7 +108,7 @@ namespace TP_Simulacion
                 if (TPC <= TREP) //me compran
                 {
                     T = TPC;
-                    //double IC = generoIC();
+                    double IC = generoIC();
                     TPC = T + 1;
                     Console.Write(TPC.ToString());
                     double R = random.NextDouble();
